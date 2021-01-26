@@ -1,0 +1,114 @@
+#!/bin/bash
+
+export template="
+server {
+	#
+	# SSL CONFIGURATION 
+	# -----------------
+	# 
+	listen 443 ssl;
+	listen [::]:443 ssl;
+	# SSL Certificat
+	ssl_certificate 	$PATH_PROJECT/certificate/$1/$ssl_certificate;
+	ssl_certificate_key	$PATH_PROJECT/certificate/$1/$ssl_certificate_key;
+	$NGINX_SSL_PROTOCOLS
+	$NGINX_SSL_PREFER_SERVER_CIPHERS
+	$NGINX_SSL_CIPHERS
+	#
+	# SERVER CONFIGURATION
+	# -------------------- 
+	#
+	root /var/www/$1/public;
+	server_name $1;
+
+	location / {
+		try_files \$uri /index.php\$is_args\$args;
+	}
+
+	# pass PHP scripts to FastCGI server
+	location ~ ^/index\.php(/|$) {
+		fastcgi_pass unix:/run/php/$phpFPM.sock;
+		fastcgi_split_path_info ^(.+\.php)(/.*)$;	
+		include fastcgi_params;
+		# fastcgi_param DATABASE_URL '$BDD://$USERNAME:$PASSWD@$HOST:$PORTBDD/$1?$SERVER_VERSION_DB';
+		# optionally set the value of the environment variables used in the application
+		# fastcgi_param APP_ENV prod;
+		# fastcgi_param APP_SECRET <app-secret-id>;
+		fastcgi_param SCRIPT_FILENAME \$realpath_root\$fastcgi_script_name;
+		fastcgi_param DOCUMENT_ROOT \$realpath_root; 
+		fastcgi_param HTTPS on;
+		fastcgi_param PATH_INFO \$path_info;
+		# include snippets/fastcgi-php.conf;		
+		internal;	
+	}
+
+	location ~ \.php$ {
+		return 404;
+   	}
+
+	# i.e. file names that begin with a dot '.'
+	location ~ /\. {
+		deny all;
+	}
+	
+	# Apache .htaccess & .htpasswd files
+	location ~ /\.(htaccess|htpasswd)$ {
+		deny  all;
+	}
+	
+	# Block access to Sqlite database files
+	location ~ /\.(?:db)$ {
+		deny  all;
+	}
+	
+	# Block access to Markdown, Twig & YAML files directly
+	location ~* /(.*)\.(?:markdown|md|twig|yaml|yml)$ {
+		deny  all;
+	}
+
+	# Other
+	location ~ /.well-known {
+		allow all;
+	}
+
+	#
+	# ERREUR & LOG
+	# ------------
+	#
+	error_log $PWD/www/$1/log/project_error.log;
+   	access_log $PWD/www/$1/log/project_access.log;
+	
+}
+
+
+# 
+# VIRTUAL HOST REWIRTE
+# --------------------
+#
+server {
+	listen 80;
+	listen [::]:80;
+
+	server_name www.$1 $1;
+
+	location / {
+		try_files \$uri \$uri/ =404;
+	}
+
+	return 301 https://$1\$request_uri;
+
+}
+
+server {
+	listen 443;
+	listen [::]:443;
+
+	server_name www.$1;
+
+	location / {
+		try_files \$uri \$uri/ =404;
+	}
+
+	return 301 https://$1\$request_uri;
+
+}"

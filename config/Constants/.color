@@ -1,0 +1,114 @@
+##
+# Bash Colors and Formatting
+#
+# Usage:
+#
+#   $ source /home/niko/include/.local/env/.colors
+#   $ echo -e "${yellow}hello, i'm yellow.${reset}"
+#
+# Reference:
+#
+#   - Bash tips: Colors and formatting <http://misc.flogisoft.com/bash/tip_colors_and_formatting>
+##
+ 
+# reset all attributes
+export reset="\\e[0m"                        # no color
+ 
+# format text
+export bold="\\e[1m"                         # bold
+export dim="\\e[2m"                          # dim
+export italic="\\e[3m"                       # italic
+export underline="\\e[4m"                    # underlined
+export blink="\\e[5m"                        # blink
+export invert="\\e[7m"                       # invert fg and bg
+export hide="\\e[8m"                         # hide
+
+# regular colors
+export black="\\e[0;30m"                     # black
+export red="\\e[0;31m"                       # red
+export green="\\e[0;32m"                     # green
+export yellow="\\e[0;33m"                    # yellow
+export blue="\\e[0;34m"                      # blue
+export purple="\\e[0;35m"                    # purple
+export cyan="\\e[0;36m"                      # cyan
+export white="\\e[0;37m"                     # white  
+
+# bright colors
+export bright_black="\\e[0;90m"              # dark gray
+export bright_red="\\e[0;91m"                # red
+export bright_green="\\e[0;92m"              # green
+export bright_yellow="\\e[0;93m"             # yellow
+export bright_blue="\\e[0;94m"               # blue
+export bright_purple="\\e[0;95m"             # purple
+export bright_cyan="\\e[0;96m"               # cyan
+export bright_white="\\e[0;97m"              # white
+
+# bold colors
+export bold_gray="\\e[1;30m"                 # gray
+export bold_red="\\e[1;31m"                  # red
+export bold_green="\\e[1;32m"                # green
+export bold_yellow="\\e[1;33m"               # yellow
+export bold_blue="\\e[1;34m"                 # blue
+export bold_purple="\\e[1;35m"               # purple
+export bold_cyan="\\e[1;36m"                 # cyan
+export bold_white="\\e[1;37m"                # white
+
+# bright bold colors
+export bright_bold_black="\\e[1;90m"         # black
+export bright_bold_red="\\e[1;91m"           # red
+export bright_bold_green="\\e[1;92m"         # green
+export bright_bold_yellow="\\e[1;93m"        # yellow
+export bright_bold_blue="\\e[1;94m"          # blue
+export bright_bold_purple="\\e[1;95m"        # purple
+export bright_bold_cyan="\\e[1;96m"          # cyan
+export bright_bold_white="\\e[1;97m"         # white
+
+# underline colors
+export underline_black="\\e[4;30m"           # black
+export underline_red="\\e[4;31m"             # red
+export underline_green="\\e[4;32m"           # green
+export underline_yellow="\\e[4;33m"          # yellow
+export underline_blue="\\e[4;34m"            # blue
+export underline_purple="\\e[4;35m"          # purple
+export underline_cyan="\\e[4;36m"            # cyan
+export underline_white="\\e[4;37m"           # white
+
+# italic colors
+export italic_black="\\e[3;30m"              # black
+export italic_red="\\e[3;31m"                # red
+export italic_green="\\e[3;32m"              # green
+export italic_yellow="\\e[3;33m"             # yellow
+export italic_blue="\\e[3;33m"               # blue
+export italic_purple="\\e[3;35m"             # purple
+export italic_cyan="\\e[3;36m"               # cyan
+export italic_white="\\e[3;37m"              # white
+
+# bright italic colors
+export bright_italic_black="\\e[3;90m"       # black
+export bright_italic_red="\\e[3;93m"         # red
+export bright_italic_green="\\e[3;92m"       # green
+export bright_italic_yellow="\\e[3;93m"      # yellow
+export bright_italic_blue="\\e[3;94m"        # blue
+export bright_italic_purple="\\e[3;95m"      # purple
+export bright_italic_cyan="\\e[3;96m"        # cyan
+export bright_italic_white="\\e[3;97m"       # white
+
+# background colors
+export background_black="\\e[40m"            # black
+export background_red="\\e[41m"              # red
+export background_green="\\e[42m"            # green
+export background_yellow="\\e[43m"           # yellow
+export background_blue="\\e[44m"             # blue
+export background_purple="\\e[45m"           # purple
+export background_cyan="\\e[46m"             # cyan
+export background_white="\\e[47m"            # white
+
+# bright background colors
+export background_bright_black="\\e[0;100m"  # black
+export background_bright_red="\\e[0;101m"    # red
+export background_bright_green="\\e[0;102m"  # green
+export background_bright_yellow="\\e[0;103m" # yellow
+export background_bright_blue="\\e[0;104m"   # blue
+export background_bright_purple="\\e[10;95m" # purple
+export background_bright_cyan="\\e[0;106m"   # cyan
+export background_bright_white="\\e[0;107m"  # white

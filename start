@@ -1,0 +1,17 @@
+#!/bin/bash
+
+source ./config/create_config.sh
+source ./config/Constants/.color
+source ./src/core/app.sh
+
+
+if [ -f ./.env ]
+then
+    source ./.env
+else
+    createConf
+fi
+
+# application
+app $@
+

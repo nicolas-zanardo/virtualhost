@@ -1,0 +1,9 @@
+# folder
+www/
+tmp/
+log/
+certificate/
+.idea/
+
+# file
+.env

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+export template="
+<VirtualHost *:80>
+    ServerName $1
+    ServerAlias $1
+
+    AddHandler php7-fcgi .php
+    Action php7-fcgi /php7-fcgi
+    Alias /php7-fcgi /usr/lib/cgi-bin/php7-fcgi
+    FastCgiExternalServer /usr/lib/cgi-bin/php7-fcgi -host 127.0.0.1:9000 -pass-header Authorization
+
+    DocumentRoot $PATH_ALL_PROJECT/$1/public
+    <Directory $PATH_ALL_PROJECT/$1/public>
+        # enable the .htaccess rewrites
+        AllowOverride All
+        Order Allow,Deny
+        Allow from all
+    </Directory>
+
+    # uncomment the following lines if you install assets as symlinks
+    # or run into problems when compiling LESS/Sass/CoffeeScript assets
+    # <Directory $PATH_ALL_PROJECT/$1/public>
+    #     Options FollowSymlinks
+    # </Directory>
+
+    ErrorLog $PATH_PROJECT/www/$1/log/project_error.log
+    CustomLog $PATH_PROJECT/www/$1/log/project_access.log combined
+</VirtualHost>
+"
